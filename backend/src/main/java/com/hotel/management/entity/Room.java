@@ -3,6 +3,7 @@ package com.hotel.management.entity;
 import com.hotel.management.enums.RoomStatus;
 import com.hotel.management.enums.RoomType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -13,13 +14,17 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Room number is required")
     @Column(nullable = false, unique = true)
     private String roomNumber;
 
+    @NotNull(message = "Room type is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RoomType type;
 
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price must be greater than 0")
     @Column(nullable = false)
     private BigDecimal pricePerNight;
 
@@ -41,4 +46,4 @@ public class Room {
 
     public RoomStatus getStatus() { return status; }
     public void setStatus(RoomStatus status) { this.status = status; }
-} 
+}

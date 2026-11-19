@@ -1,7 +1,9 @@
 package com.hotel.management.controller;
 
 import com.hotel.management.entity.Room;
-import com.hotel.management.repository.RoomRepository;
+import com.hotel.management.service.RoomService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +12,36 @@ import java.util.List;
 @RequestMapping("/api/rooms")
 public class RoomController {
 
-    private final RoomRepository roomRepository;
+    private final RoomService roomService;
 
-    public RoomController(RoomRepository roomRepository) {
-        this.roomRepository = roomRepository;
+    public RoomController(RoomService roomService) {
+        this.roomService = roomService;
     }
 
     @GetMapping
     public List<Room> getAllRooms() {
-        return roomRepository.findAll();
+        return roomService.getAllRooms();
+    }
+
+    @GetMapping("/{id}")
+    public Room getRoom(@PathVariable Long id) {
+        return roomService.getRoomById(id);
     }
 
     @PostMapping
-    public Room addRoom(@RequestBody Room room) {
-        return roomRepository.save(room);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Room addRoom(@Valid @RequestBody Room room) {
+        return roomService.addRoom(room);
+    }
+
+    @PutMapping("/{id}")
+    public Room updateRoom(@PathVariable Long id, @Valid @RequestBody Room room) {
+        return roomService.updateRoom(id, room);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteRoom(@PathVariable Long id) {
+        roomService.deleteRoom(id);
     }
 }
