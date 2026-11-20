@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCustomers, addCustomer } from "../../services/customerService";
+import { getCustomers, addCustomer } from "../../services/CustomerService";
 
 const emptyForm = { fullName: "", email: "", phone: "", address: "" };
 
