@@ -90,7 +90,7 @@ HotelManagement/
 
 ## 👨‍💻 Author
 
-**Shaik Mansoor Sadhik**
+**Shaik Mansoor**
 
 - GitHub: [@Mansoorsk12](https://github.com/Mansoorsk12)
 
